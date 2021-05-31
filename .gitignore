@@ -1,3 +1,5 @@
 api/node_modules
 api/db_data
 api/dist
+api/.env
+api/.envrc
