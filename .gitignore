@@ -3,3 +3,7 @@ api/db_data
 api/dist
 api/.env
 api/.envrc
+api/.env-docker
+api/dist
+api/.private
+

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-api-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-api-pod
+  template:
+    metadata:
+      labels:
+        app: sample-api-pod
+    spec:
+      containers:
+        - name: sample-api-container
+          image: xxx.dkr.ecr.us-west-2.amazonaws.com/sample-api:1.0.0
+          env:
+            - name: DB_HOST
+              value: sample-database.xxx.us-west-2.rds.amazonaws.com
+            - name: DB_USER
+              value: admin
+            - name: DB_PASSWORD
+              value: password
+            - name: DB_DATABASE
+              value: sampledb
+          ports:
+            - protocol: TCP
+              containerPort: 3000

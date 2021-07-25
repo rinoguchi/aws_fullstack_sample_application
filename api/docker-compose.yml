@@ -1,15 +1,22 @@
 version: '3.1'
 
 services:
-  db:
-    image: mariadb:latest
-    restart: always
-    ports:
-        - "3306:3306"
-    volumes:
-        - "./db_data:/var/lib/mysql"
-    environment:
-        MARIADB_ROOT_PASSWORD: "root_password" # `root`ユーザのパスワード
-        MARIADB_DATABASE: "sampledb" # 初期化時に作成するデータベース
-        MARIADB_USER: "appuser" # 初期化時に作成するユーザ
-        MARIADB_PASSWORD: "appuser_password" # 初期化時に作成するユーザのパスワード
+    api:
+        build: .
+        image: sample-api:latest
+        ports:
+            - "3000:3000"
+        env_file:
+            - .env-docker
+    db:
+        image: mariadb:latest
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./db_data:/var/lib/mysql"
+        environment:
+            MARIADB_ROOT_PASSWORD: "root_password" # `root`ユーザのパスワード
+            MARIADB_DATABASE: "sampledb" # 初期化時に作成するデータベース
+            MARIADB_USER: "appuser" # 初期化時に作成するユーザ
+            MARIADB_PASSWORD: "appuser_password" # 初期化時に作成するユーザのパスワード

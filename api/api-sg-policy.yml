@@ -1,0 +1,12 @@
+apiVersion: vpcresources.k8s.aws/v1beta1
+kind: SecurityGroupPolicy
+metadata:
+  name: sample-api-sg-policy
+spec:
+  podSelector: 
+    matchLabels:
+      app: sample-api-pod
+  securityGroups:
+    groupIds:
+      - sg-xxx # EKSが所属するpublicサブネット用に自分で作ったやつ
+      - sg-xxx # クラスタ作成時に自動生成
