@@ -9,9 +9,9 @@ export AWS_SECRET_ACCESS_KEY=xxx
 # イメージの作成
 docker build . -t sample-api:1.0.0
 # タグを追加
-docker tag sample-api:1.0.0 xxx.dkr.ecr.us-west-2.amazonaws.com/sample-repository/sample-api:1.0.0
+docker tag sample-api:1.0.0 xxx.dkr.ecr.us-west-2.amazonaws.com/sample-api:1.0.0
 # ECRにプッシュ
-docker push xxx.dkr.ecr.us-west-2.amazonaws.com/sample-repository/sample-api:1.0.0
+docker push xxx.dkr.ecr.us-west-2.amazonaws.com/sample-api:1.0.0
 ```
 
 ## EKSクラスタ整備
@@ -134,5 +134,8 @@ aws eks delete-cluster \
   --name sample-eks-cluster \
   --region us-west-2 \
   --profile sample-admin
+
+# Elastic IPアドレスの解放
+https://us-west-2.console.aws.amazon.com/vpc/home?region=us-west-2#Addresses:
 
 ```

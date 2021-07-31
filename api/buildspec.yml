@@ -1,5 +1,18 @@
 version: 0.2
+env:
+  parameter-store:
+    AWS_ACCESS_KEY_ID: /CodeBuild/AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: /CodeBuild/AWS_SECRET_ACCESS_KEY
 phases:
+  pre_build:
+    commands:
+      - IMAGE_TAG=$(git describe --tags)
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${ECR_URL}
   build:
     commands:
-      - ls -la
+      - cd api # Dockerfile のフォルダに移動
+      - docker build . -t sample-api:${IMAGE_TAG}
+      - docker tag sample-api:${IMAGE_TAG} ${ECR_URL}/sample-api:${IMAGE_TAG}
+  post_build:
+    commands:
+      - docker push ${ECR_URL}/sample-api:${IMAGE_TAG}
