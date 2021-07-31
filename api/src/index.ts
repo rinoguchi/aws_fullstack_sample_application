@@ -18,6 +18,7 @@ app.use(express.urlencoded({
 }));
 // ルーティングの定義
 app.get('/comments/:id', async (req: express.Request, res: express.Response) => {
+    console.log('get comment started.')
     let conn: mariadb.PoolConnection | undefined;
     try {
         conn = await pool.getConnection();
@@ -30,6 +31,7 @@ app.get('/comments/:id', async (req: express.Request, res: express.Response) => 
     }
 })
 app.post('/comments', async (req: express.Request, res: express.Response) => {
+    console.log('post comment started.')
     let conn: mariadb.PoolConnection | undefined;
     try {
         conn = await pool.getConnection();

@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
         - name: sample-api-container
-          image: xxx.dkr.ecr.us-west-2.amazonaws.com/sample-api:1.0.0
+          image: __ECR_URL__/sample-api:__IMAGE_TAG__
           env:
             - name: DB_HOST
-              value: sample-database.xxx.us-west-2.rds.amazonaws.com
+              value: __RDS_HOST__
             - name: DB_USER
               value: admin
             - name: DB_PASSWORD

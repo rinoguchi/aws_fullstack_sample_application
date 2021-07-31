@@ -1,0 +1,14 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - IMAGE_TAG=$(git describe --tags)
+  build:
+    commands:
+      - cd api # 対象フォルダに移動
+      - aws eks update-kubeconfig --region us-west-2 --name sample-eks-cluster
+      - sed -i -e "s/__IMAGE_TAG__/${IMAGE_TAG}/" ./api-deployment.yml
+      - sed -i -e "s/__RDS_HOST__/${RDS_HOST}/" ./api-deployment.yml
+      - sed -i -e "s/__ECR_URL__/${ECR_URL}/" ./api-deployment.yml
+      - kubectl apply -f ./api-deployment.yml
+
