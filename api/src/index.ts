@@ -18,6 +18,7 @@ app.use(express.urlencoded({
 }));
 // ルーティングの定義
 app.get('/comments/:id', async (req: express.Request, res: express.Response) => {
+    console.log('codepipelne installed.')
     console.log('get comment started.')
     let conn: mariadb.PoolConnection | undefined;
     try {
